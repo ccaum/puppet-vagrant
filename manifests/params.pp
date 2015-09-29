@@ -5,7 +5,7 @@
 class vagrant::params {
   case $::kernel {
     'Darwin': {
-      $binary = '/usr/bin/vagrant'
+      $binary = '/usr/local/bin/vagrant'
       $grep   = '/usr/bin/grep -i'
       $su     = '/usr/bin/su'
     }
