@@ -60,7 +60,7 @@ class vagrant($version = get_latest_vagrant_version()) {
 
   # Finally determine download url and provider
   case $::operatingsystem {
-    centos, redhat, fedora: {
+    'centos', 'redhat', 'fedora': {
       case $::architecture {
         x86_64, amd64: {
           $vagrant_source = "${base_url}/vagrant_${version}_x86_64.rpm"
@@ -75,11 +75,11 @@ class vagrant($version = get_latest_vagrant_version()) {
         }
       }
     }
-    Darwin: {
+    'Darwin': {
       $vagrant_source   = "${base_url}/${darwin_prefix}${version}.dmg"
       $vagrant_provider = 'pkgdmg'
     }
-    debian, ubuntu, linuxmint: {
+    'debian', 'ubuntu', 'linuxmint': {
       case $::architecture {
         x86_64, amd64: {
           $vagrant_filename = "vagrant_${version}_x86_64.deb"
@@ -103,7 +103,7 @@ class vagrant($version = get_latest_vagrant_version()) {
         before  => Package["vagrant-${version}"]
       }
     }
-    windows: {
+    'windows': {
       $vagrant_filename = "${windows_prefix}${version}.msi"
       $vagrant_source   = "${::ostempdir}\\${vagrant_filename}"
       $vagrant_provider = 'windows'

@@ -15,6 +15,7 @@ define vagrant::plugin($plugin_name = $title, $user = $::id) {
   include vagrant::params
 
   vagrant::command { "${vagrant::params::binary} plugin install ${plugin_name}":
-    user => $user
+    user   => $user
+    unless => "${vagrant::params::binary} plugin list | cut -d" " -f1 | grep '^${plugin_name}$'",
   }
 }
