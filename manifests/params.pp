@@ -20,7 +20,7 @@ class vagrant::params {
       $grep    = 'findstr.exe /I'
     }
     default: {
-      $path = [ '/bin', '/sbin', '/usr/bin', '/usr/sbin' ]
+      $path = [ '/bin', '/sbin', '/usr/bin', '/usr/sbin', '/usr/local/bin' ]
       $vagrant = 'vagrant'
       $grep    = 'grep -i'
     }
