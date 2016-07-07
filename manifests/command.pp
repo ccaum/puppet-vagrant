@@ -25,7 +25,7 @@ define vagrant::command($command = $title, $unless = undef, $user = $::id) {
 
   $exec_command = $::kernel ? {
     'windows' => "C:\\Windows\\System32\\cmd.exe /C ${command}",
-    default   => "${vagrant::params::su} -l ${user} -c '${command}'"
+    default   => "${vagrant::params::su} ${user} -c '${command}'"
   }
 
   if $unless == undef {
@@ -33,7 +33,7 @@ define vagrant::command($command = $title, $unless = undef, $user = $::id) {
   } elsif $::kernel == 'windows' {
     $exec_unless = "C:\\Windows\\System32\\cmd.exe /C ${unless}"
   } else {
-    $exec_unless = "${vagrant::params::su} -l ${user} -c '${unless}'"
+    $exec_unless = "${vagrant::params::su} ${user} -c '${unless}'"
   }
 
   exec { $exec_command:
